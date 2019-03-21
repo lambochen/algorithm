@@ -148,4 +148,39 @@ public class SimpleSelectionSort {
         return result;
     }
 
+    /**
+     * 方法三：
+     * <p>
+     * 对选择排序进行优化，每一趟进行选择最大、最小两个元素
+     */
+    public int[] simpleSelectionSort05(int[] data) {
+        int[] result = new int[data.length];
+        boolean[] flag = new boolean[data.length];
+        /**
+         * 初始化标记数组
+         */
+        for (int i = 0; i < flag.length; i++) {
+            flag[i] = true;
+        }
+        for (int i = 0; i < data.length; i++) {
+            int tmpMin = Integer.MIN_VALUE;
+            int tmpMax = Integer.MAX_VALUE;
+            int resMin = 0;
+            int resMax = 0;
+            for (int j = 0; j < data.length; j++) {
+                if (flag[j] && data[j] > tmpMin) {
+                    tmpMin = data[j];
+                    resMin = j;
+                } else if (flag[j] && data[j] < tmpMax) {
+                    tmpMax = data[j];
+                    resMax = j;
+                }
+            }
+            result[i] = tmpMin;
+            flag[resMin] = false;
+            result[data.length - 1 - i] = tmpMax;
+            flag[resMax] = false;
+        }
+        return result;
+    }
 }
