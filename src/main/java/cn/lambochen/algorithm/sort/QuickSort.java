@@ -1,7 +1,5 @@
 package cn.lambochen.algorithm.sort;
 
-import org.junit.Test;
-
 /**
  * @Description 快排
  * @Author chenlinghong
@@ -19,7 +17,7 @@ public class QuickSort {
      * 4）然后分别对这两部分记录用同样的方法继续进行排序，直到整个序列有序。
      */
 
-    public void quickSort(int[] data) {
+    static void quickSort(int[] data) {
         quickSort(data, 0, data.length);
     }
 
@@ -30,45 +28,36 @@ public class QuickSort {
      * @param start 开始下标
      * @param end   结束下标
      */
-    public void quickSort(int[] data, int start, int end) {
+    static void quickSort(int[] data, int start, int end) {
         if (start >= end - 1) {
             return;
         }
-        // 选第一个元素作为基准
-        int first = start + 1, second = end - 1;
-        while (first < second) {
-            // 寻找左值中比基准大的元素下标
-            while (first < second && data[first] <= data[start]) {
-                first++;
+
+        int left = start, right = end - 1;
+        int pivot = data[start + (end - start) / 2];
+
+        while (left < right) {
+            if (data[left] < pivot) {
+                left++;
+                continue;
             }
-            // 寻找右部分中比基准小的元素下标
-            while (first < second && data[second] >= data[start]) {
-                second--;
+            if (data[right] > pivot) {
+                right--;
+                continue;
             }
-            if (first < second) {
-                int tmp = data[first];
-                data[first] = data[second];
-                data[second] = tmp;
-                first++;
-                second--;
-            }
+
+            int tmp = data[left];
+            data[left] = data[right];
+            data[right] = tmp;
+            left++;
+            right--;
         }
-        if (first >= second) {
-            // 前后指针相遇
-            int tmp = start, tmpValue = data[start];
-            while (tmp < first) {
-                data[tmp] = data[tmp + 1];
-                tmp++;
-            }
-            data[first] = tmpValue;
-            quickSort(data, start, first);
-            quickSort(data, first, end);
-        }
+
+        quickSort(data, start, right);
+        quickSort(data, left, end);
     }
 
-
-    @Test
-    public void test() {
+    public static void main(String[] args) {
         int[] a = new int[]{4, 1, 57, 32, 5, 0};
         quickSort(a);
         for (int tmp : a) {
