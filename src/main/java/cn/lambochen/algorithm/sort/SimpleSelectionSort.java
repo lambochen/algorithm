@@ -183,4 +183,54 @@ public class SimpleSelectionSort {
         }
         return result;
     }
+
+    static int[] selectionSort(int[] datas) {
+        if (null == datas || datas.length <= 1) {
+            return datas;
+        }
+
+        int[] res = new int[datas.length];
+        boolean[] flag = new boolean[datas.length];
+        for (int i = 0; i < datas.length; i++) {
+            int currentMin = i;
+            for (int j = i + 1; j < datas.length; j++) {
+                if (!flag[j] && datas[j] < datas[currentMin]) {
+                    currentMin = j;
+                }
+            }
+            res[i] = datas[currentMin];
+            flag[currentMin] = true;
+        }
+
+        return res;
+    }
+
+    static void selectionSortInOriginal(int[] datas) {
+        if (null == datas || datas.length <= 1) {
+            return;
+        }
+
+        for (int i = 0; i < datas.length; i++) {
+            int currentMinIdx = i;
+            for (int j = i + 1; j < datas.length; j++) {
+                if (datas[j] < datas[currentMinIdx]) {
+                    currentMinIdx = j;
+                }
+            }
+
+            if (currentMinIdx != i) {
+                int tmp = datas[i];
+                datas[i] = datas[currentMinIdx];
+                datas[currentMinIdx] = tmp;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        selectionSort(new int[]{5, 2, 4, 5, 6});
+
+        int[] datas = new int[]{5, 2, 4, 5, 6};
+        selectionSortInOriginal(datas);
+        System.out.println(datas);
+    }
 }
