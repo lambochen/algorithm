@@ -1,4 +1,4 @@
-package com.chenlinghong.algorithm.sort;
+package cn.lambochen.algorithm.sort;
 
 import org.junit.Test;
 

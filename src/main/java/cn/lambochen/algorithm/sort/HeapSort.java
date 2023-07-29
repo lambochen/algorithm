@@ -1,4 +1,4 @@
-package com.chenlinghong.algorithm.sort;
+package cn.lambochen.algorithm.sort;
 
 /**
  * @Description 堆排序
